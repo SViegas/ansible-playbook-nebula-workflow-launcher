@@ -12,7 +12,6 @@
     body:
       extra_vars:
         service_id: "{{ service_id }}"
-        name: "{{ name }}"
         vm_country: "{{ vm_country }}"
         vm_infrastructure: "{{ vm_infrastructure }}"
         vm_os: "{{ vm_os }}"
