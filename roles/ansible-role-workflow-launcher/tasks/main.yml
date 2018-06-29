@@ -1,0 +1,51 @@
+---
+
+#- name: Get encrypted variables
+#  include_vars: wf_launcher_vars.yml
+
+- name: Launching Workflow Job Template
+  uri:
+    url: https://{{ ansible_tower_ip }}/api/v1/workflow_job_templates/{{ workflow_job_template_id }}/launch/
+    method: POST
+    user: "{{ tower_user }}"
+    password: "{{ tower_pass }}"
+    body:
+      extra_vars:
+        service_id: "{{ service_id }}"
+        name: "{{ name }}"
+        vm_country: "{{ vm_country }}"
+        vm_infrastructure: "{{ vm_infrastructure }}"
+        vm_os: "{{ vm_os }}"
+    body_format: json
+    validate_certs: False
+    headers:
+      Content-Type: "application/json"
+    status_code: 200, 201
+  register: response
+
+- name: Get the Workflow Job Id
+  set_fact:
+    workflow_id: "{{ response.json.workflow_job }}"
+
+- name: Ansible Tower Workflow Job Id
+  debug: var=workflow_id
+
+- name: Wait for Workflow to finish
+  uri:
+    url: https://{{ ansible_tower_ip }}/api/v1/workflow_jobs/{{ workflow_id }}/
+    method: GET
+    user: "{{ tower_user }}"
+    password: "{{ tower_pass }}"
+    body_format: json
+    validate_certs: False
+    headers:
+      Content-Type: "application/json"
+    status_code: 200, 201
+  register: workflow_result
+  until: workflow_result.json.status == "successful"
+  failed_when: workflow_result.json.failed == 'true'
+  retries: 10
+  delay: 20
+
+- name: Show Workflow Result
+  debug: var=workflow_result
