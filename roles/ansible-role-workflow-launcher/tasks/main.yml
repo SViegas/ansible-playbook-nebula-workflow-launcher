@@ -16,6 +16,13 @@
         vm_country: "{{ vm_country }}"
         vm_infrastructure: "{{ vm_infrastructure }}"
         vm_os: "{{ vm_os }}"
+        datacenter: "{{ datacenter }}"
+        env: "{{ env }}"
+        os_template: "{{ os_template }}"
+        memory: "{{ memory }}"
+        cpu: "{{ cpu }}"
+        host_disk: "{{ host_disk }}"
+        data_disk: "{{ data_disk }}"
     body_format: json
     validate_certs: False
     headers:
