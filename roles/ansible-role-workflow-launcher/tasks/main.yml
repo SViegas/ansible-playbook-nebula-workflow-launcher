@@ -11,6 +11,7 @@
     password: "{{ tower_pass }}"
     body:
       extra_vars:
+        service_name: "{{ service_name | default('Nebula Service') }}"
         service_id: "{{ service_id }}"
         vm_country: "{{ vm_country }}"
         vm_infrastructure: "{{ vm_infrastructure }}"
