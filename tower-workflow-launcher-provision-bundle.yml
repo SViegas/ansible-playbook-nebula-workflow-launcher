@@ -1,0 +1,8 @@
+---
+- name: Launching Workflow
+  hosts: localhost
+  gather_facts: False
+  connection: local
+
+  roles:
+    - ansible-role-workflow-launcher-provision-bundle
