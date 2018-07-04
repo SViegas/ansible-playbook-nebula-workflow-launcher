@@ -50,7 +50,7 @@
   register: workflow_result
   until: workflow_result.json.status == "successful"
   failed_when: workflow_result.json.failed == 'true'
-  retries: 10
+  retries: 15
   delay: 20
 
 - name: Show Workflow Result
