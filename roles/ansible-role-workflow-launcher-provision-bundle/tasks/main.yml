@@ -53,6 +53,7 @@
   failed_when: workflow_result.json.failed == 'true'
   retries: 15
   delay: 20
+  with_sequence: start=1 end="{{ number_or_vms }}"
 
 - name: Show Workflow Result
   debug: var=workflow_result
