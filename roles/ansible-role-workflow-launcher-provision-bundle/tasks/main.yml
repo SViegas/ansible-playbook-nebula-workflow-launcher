@@ -49,11 +49,10 @@
       Content-Type: "application/json"
     status_code: 200, 201
   register: workflow_result
-  #until: workflow_result.json.status == "successful"
+  until: workflow_result.json.status == "successful"
   failed_when: workflow_result.json.failed == 'true'
   retries: 15
   delay: 20
-  with_sequence: start=1 end="{{ number_or_vms }}"
 
 - name: Show Workflow Result
   debug: var=workflow_result
