@@ -1,13 +1,6 @@
 ---
 # tasks file for ansible-role-workflow-launcher-deprovision-vm
 
-- name: "Getting IPv4 Addresses"
-  set_fact:
-    vm_ipv4_addresses: "{{ ip_addresses | ipv4 }}"
-
-- name: "Task Results: Getting IPv4 Addresses"
-  debug: var=vm_ipv4_addresses
-
 - name: Launching Workflow Job Template
   uri:
     url: https://{{ ansible_tower_ip }}/api/v1/workflow_job_templates/{{ workflow_job_template_id }}/launch/
