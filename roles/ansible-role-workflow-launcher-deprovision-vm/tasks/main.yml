@@ -10,7 +10,7 @@
     body:
       extra_vars:
         vm_name: "{{ vm_name }}"
-        ip_address: "{{ ip_address }}"
+        ip_addresses: "{{ ip_addresses }}"
         datacenter: "{{ datacenter }}"
     body_format: json
     validate_certs: False
